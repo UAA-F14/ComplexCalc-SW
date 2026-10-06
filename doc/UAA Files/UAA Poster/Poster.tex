@@ -1,0 +1,253 @@
+% ============================================================
+%  Póster científico minimalista (tikzposter)
+%  Compilar con: pdflatex poster_minimalista.tex  (2 pasadas)
+%  Tamaño: 90 x 120 cm (ancho x alto, vertical), 3 columnas
+%  Para cambiar el color de acento: edita \definecolor{acento}
+% ============================================================
+\documentclass[25pt, a0paper, portrait,
+  margin=0mm, innermargin=18mm,
+  blockverticalspace=14mm, colspace=16mm, subcolspace=8mm]{tikzposter}
+
+% ---------- Tamaño personalizado: 90 x 120 cm (ancho x alto) ----------
+% tikzposter solo acepta a0/a1/a2 como opción; aquí se sobrescribe con geometry.
+\geometry{paperwidth=90cm, paperheight=120cm, margin=0mm}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{lmodern}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+% ---------- Paleta (minimalista: negro, gris y un acento) ----------
+\definecolor{tinta}{HTML}{1A1A1A}
+\definecolor{gris}{HTML}{6B6B6B}
+\definecolor{acento}{HTML}{0057B8}
+
+\definecolorstyle{Minimal}{}{
+  \colorlet{backgroundcolor}{white}
+  \colorlet{framecolor}{white}
+  \colorlet{titlefgcolor}{tinta}
+  \colorlet{titlebgcolor}{white}
+  \colorlet{blocktitlebgcolor}{white}
+  \colorlet{blocktitlefgcolor}{acento}
+  \colorlet{blockbodybgcolor}{white}
+  \colorlet{blockbodyfgcolor}{tinta}
+  \colorlet{innerblocktitlebgcolor}{white}
+  \colorlet{innerblocktitlefgcolor}{acento}
+  \colorlet{innerblockbodybgcolor}{white}
+  \colorlet{innerblockbodyfgcolor}{tinta}
+  \colorlet{notefgcolor}{tinta}
+  \colorlet{notebgcolor}{white}
+  \colorlet{noteframecolor}{acento}
+}
+
+% ---------- Título: sin caja ni sombras ----------
+\definetitlestyle{Minimal}{
+  width=\textwidth, roundedcorners=0, linewidth=0pt, innersep=0pt,
+  titletotopverticalspace=18mm, titletoblockverticalspace=14mm
+}{}
+
+% ---------- Bloques: solo una línea fina bajo el encabezado ----------
+\defineblockstyle{Minimal}{
+  titlewidthscale=1, bodywidthscale=1, titleleft,
+  titleoffsetx=0pt, titleoffsety=0pt,
+  bodyoffsetx=0pt, bodyoffsety=0pt,
+  bodyverticalshift=8mm, roundedcorners=0, linewidth=0pt,
+  titleinnersep=4mm, bodyinnersep=0pt
+}{
+  \draw[color=blocktitlefgcolor, line width=1.5pt]
+    (blocktitle.south west) -- (blocktitle.south east);
+}
+
+\definebackgroundstyle{Minimal}{}
+\usecolorstyle{Minimal}
+\usetitlestyle{Minimal}
+\useblockstyle{Minimal}
+\usebackgroundstyle{Minimal}
+
+% Estilo del título principal (edita el texto del título en las 3 líneas de abajo)
+\makeatletter
+\settitle{\centering\parbox{80cm}{\centering\color{titlefgcolor}%
+  {\bfseries\fontsize{88}{100}\selectfont
+    Desarrollo asistido por Inteligencia Artificial\\
+    de un resolvedor de sistemas de ecuaciones\\
+    complejas para análisis de circuitos \par}\vspace{12mm}
+  {\fontsize{52}{62}\selectfont \@author \par}\vspace{6mm}
+  {\color{gris}\fontsize{42}{52}\selectfont \@institute \par}}}
+\makeatother
+
+% Tamaños de texto (póster 90x120 cm). Ajusta el cuerpo con \large.
+\makeatletter
+\renewcommand\footnotesize{\@setfontsize\footnotesize{32}{40}}
+\renewcommand\small{\@setfontsize\small{38}{48}}
+\renewcommand\normalsize{\@setfontsize\normalsize{42}{54}}
+\renewcommand\large{\@setfontsize\large{48}{60}}      % cuerpo de los bloques
+\renewcommand\LARGE{\@setfontsize\LARGE{64}{76}}      % títulos de bloque
+\makeatother
+
+% Listas compactas
+\setlist{itemsep=2mm, topsep=2mm, leftmargin=*}
+
+% ---------- Carpetas donde buscar las figuras ----------
+\graphicspath{{./}{Complex calc/}{Projects/Complex Calc/LaTeXProject/Complex calc/}}
+
+% \figuraopt{archivo}{fracción de \linewidth}{pie de figura}
+% Si el archivo no existe, dibuja un recuadro gris en su lugar.
+\newcommand{\figuraopt}[3]{%
+  \begin{tikzfigure}[#3]
+    \IfFileExists{#1}{\includegraphics[width=#2\linewidth]{#1}}{%
+      \tikz\draw[gris, line width=1pt] (0,0) rectangle (#2\linewidth, 0.5*#2\linewidth)
+        node[midway, gris]{\fontsize{30}{36}\selectfont #1};}%
+  \end{tikzfigure}}
+
+% ---------- Metadatos ----------
+% (El texto del título que se muestra se edita dentro de \settitle, arriba, con saltos \\ manuales.)
+\title{Desarrollo asistido por IA de un resolvedor de sistemas de ecuaciones complejas}
+\author{Orlando Contreras Reyes, Iker Emiliano García Barrera,\\
+        Dr. Luís Alejandro Flores Oropeza, Dr. Alejandro Román Loera}
+\institute{Universidad Autónoma de Aguascalientes \quad
+           \texttt{al348390@edu.uaa.mx}}
+
+\begin{document}
+\tikzposterlatexaffectionproofoff  % quita el logo "LaTeX TikZposter" del pie
+\maketitle
+
+\begin{columns}
+
+% ======================= COLUMNA 1 =======================
+\column{0.333}
+
+\block{Introducción}{
+  El análisis de circuitos (mallas o nodos) exige resolver sistemas de
+  ecuaciones con números complejos. Las soluciones habituales presentan
+  limitaciones:
+
+  \begin{itemize}
+    \item \textbf{Regla de Cramer:} método poco eficiente.
+    \item \textbf{Calculadoras físicas y simuladores} (p.\,ej. HP-48G, Droid~48):
+          ingreso de datos poco eficiente y resultados solo en forma
+          rectangular o solo polar.
+    \item \textbf{Deshonestidad académica:} uso de herramientas sin
+          comprender el proceso.
+  \end{itemize}
+
+  \vspace{4mm}
+  \textbf{Objetivo.} Crear una aplicación de escritorio, portátil y
+  gratuita que resuelva sistemas de ecuaciones complejas y muestre los
+  resultados en ambas formas, desarrollada junto con IA.
+}
+
+\block{Métodos: herramientas}{
+  \begin{itemize}
+    \item \textbf{Lenguaje y entorno:} Python 3.10+, Visual Studio Code.
+    \item \texttt{NumPy}: álgebra lineal compleja.
+    \item \texttt{CustomTkinter} y \texttt{Tkinter}: interfaz gráfica.
+    \item \texttt{Pillow}, \texttt{OS} y \texttt{JSON}: recursos gráficos,
+          archivos e historial de matrices.
+    \item \textbf{IA:} ChatGPT (OpenAI) para código base, refactorización
+          y diseño de la GUI.
+    \item \texttt{PyInstaller}: ejecutable único
+          (\texttt{--onefile}, \texttt{--noconsole}) para Windows y GNU/Linux.
+  \end{itemize}
+}
+
+\block{Filosofía}{
+  \textit{Open Source} y \textit{Vibe Coding}: el proyecto lo realizaron
+  alumnos con bases de programación en C para microcontroladores. Con
+  buenas bases, el ingeniero puede construir sus propias herramientas.
+  Se publica bajo licencia MIT para que otros estudiantes aprendan,
+  contribuyan y la reutilicen.
+}
+
+% ======================= COLUMNA 2 =======================
+\column{0.333}
+
+\block{Métodos: arquitectura y algoritmo}{
+  \figuraopt{src/Architecture.png}{0.95}{Arquitectura modular.}
+
+  \vspace{4mm}
+  Un sistema de $n \times n$ se plantea como
+  \begin{equation*}
+    [\mathbf{Z}][\mathbf{I}] = [\mathbf{V}]
+    \;\Rightarrow\;
+    [\mathbf{I}] = [\mathbf{Z}]^{-1}[\mathbf{V}]
+  \end{equation*}
+  y se resuelve con \texttt{numpy.linalg.solve}. Los resultados se
+  convierten a forma polar:
+  \begin{equation*}
+    r = \sqrt{a^2 + b^2}, \qquad \theta = \arctan\!\left(\frac{b}{a}\right)
+  \end{equation*}
+  Entrada en forma rectangular ($a + jb$) o polar ($r\angle\theta^\circ$).
+}
+
+\block{Flujo de trabajo con IA}{
+  \begin{enumerate}
+    \item Maquetas iniciales de ventanas y celdas matriciales editables.
+    \item Solución de errores con arreglos complejos en tiempo real.
+    \item Refactorización: separar cálculo y renderizado.
+    \item \textbf{Validación humana:} cada fragmento fue revisado,
+          probado y contrastado con ejercicios resueltos a mano.
+  \end{enumerate}
+}
+
+\block{Discusión}{
+  \begin{itemize}
+    \item Útil en Análisis de Circuitos, Electrónica, Señales y Sistemas
+          y Métodos Matemáticos.
+    \item Historial de operaciones y guardado/carga de matrices.
+    \item Interfaz reorganizada para ser clara a usuarios sin experiencia.
+    \item Tkinter limita los temas visuales; se personalizó un archivo
+          \texttt{.json} de estilos.
+  \end{itemize}
+}
+
+% ======================= COLUMNA 3 =======================
+\column{0.333}
+
+\block{Resultados}{
+  \figuraopt{RectSol.png}{0.95}{Solución de un sistema complejo en forma rectangular.}
+
+  \vspace{4mm}
+  \figuraopt{SolDC.png}{0.95}{Solución de un sistema complejo en forma polar.}
+}
+
+\block{Conclusiones}{
+  \begin{enumerate}
+    \item La IA es un apoyo, no un sustituto del conocimiento del
+          programador: reduce el tiempo de desarrollo, pero exige
+          entender y validar el código.
+    \item Con bases de C para microcontroladores se logró una
+          aplicación funcional con entrada y conversión rectangular/polar.
+    \item El ejecutable facilita su distribución sin configurar el entorno.
+    \item Licencia MIT: base abierta para mejoras y herramientas similares.
+  \end{enumerate}
+}
+
+\block{Referencias}{
+  \footnotesize
+  \begin{enumerate}[label={[\arabic*]}, itemsep=1mm]
+    \item H. Anton y C. Rorres, \textit{Álgebra lineal con aplicaciones}. Wiley, 2013.
+    \item D. C. Lay, \textit{Álgebra lineal y sus aplicaciones}, 4.ª ed. Pearson, 2012.
+    \item NumPy Developers, \textit{numpy.linalg.solve}. NumPy Documentation, 2026.
+    \item Python Software Foundation, \textit{Built-in Types} y \textit{tkinter}. Python Documentation, 2026.
+    \item D. Cortesi \textit{et al.}, \textit{PyInstaller Manual}, 2026.
+    \item OpenAI, \textit{ChatGPT}, 2026.
+  \end{enumerate}
+}
+
+\block{Contacto y código}{
+  \footnotesize
+  \texttt{al348390@edu.uaa.mx} \\
+  \url{https://github.com/DasReyxr/Py-ComplexCalc}
+  % \vspace{4mm}
+  % \includegraphics[width=0.25\linewidth]{qr.png}
+}
+
+\end{columns}
+
+\end{document}
