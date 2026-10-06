@@ -15,7 +15,10 @@ def complejo_a_fasor(z):
 
 def complejo_rect(z):
     """Return rectangular a + bj string with 4 significant digits."""
-    return f"{z.real:.4g} + {z.imag:.4g}j"
+    if (z.imag>0):
+        return f"{z.real:.4g} + {z.imag:.4g}j"
+    elif (z.imag<0):
+        return f"{z.real:.4g} - {abs(z.imag):.4g}j"
 
 
 class FasorCalculatorCore:

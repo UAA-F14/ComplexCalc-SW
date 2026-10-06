@@ -42,8 +42,8 @@ IE_PATH_PHOTO = resource_path("IE.png")
 
 # ------- Project metadata (used by the About dialog) -------
 APP_VERSION = "5.0"
-LAST_UPDATED = "2026-09-16"
-GITHUB_URL = "https://github.com/DasReyxr/Py-ComplexCalc"
+LAST_UPDATED = "2026-10-06"
+GITHUB_URL = "https://github.com/UAA-F14/ComplexCalc-SW"
 INSTITUTION = "Universidad Autónoma de Aguascalientes"
 DEPARTMENT = "Ingeniería en Electrónica"
 CREATORS = [
@@ -59,140 +59,135 @@ CREATORS = [
 # "r∠θ ⇄ a+jb") — everything else the user reads goes through APP_TEXT via
 # FasorCalculator.t(key, **kwargs), so the "Language:" selector can flip the
 # whole app, not just one panel.
-APP_TEXT = {
-    "en": {
-        "theme_label": "Theme:",
-        "lang_label": "Language:",
-        "instructions": (
-            "For and By Electronics Engineers\n\n\n"
-            "How to enter values:\n"
-            "You can type values as complex numbers or phasors.\n"
-            "Complex: 3+4j, -j2, 5, 1.2-3j\n"
-            "Phasors: 10L30°, 5L-90, 3L0°, 2.5L45\n"
-            "Angle in degrees. Max size: 10x10."
-        ),
-        "btn_change_size": "Change size",
-        "btn_load_example": "Load example",
-        "btn_solve": "Solve",
-        "btn_load_saved": "Load saved system",
-        "btn_import": "Import from file...",
-        "btn_refresh_saved": "Refresh saved list",
-        "solution_history": "Solution history:",
-        "saved_systems": "Saved systems:",
-        "menu_file": "File",
-        "menu_save_current": "Save current system (Solve & Save)",
-        "menu_import": "Import from file...",
-        "menu_load_saved": "Load saved system",
-        "menu_refresh_saved": "Refresh saved list",
-        "menu_exit": "Exit",
-        "menu_help": "Help",
-        "menu_about": "About Complex Calc...",
-        "about_title": "About Complex Calc",
-        "about_heading": "Complex Calc",
-        "about_version": "Version {version}  •  Last updated: {date}",
-        "about_github": "GitHub: DasReyxr/Py-ComplexCalc",
-        "about_creators": "Creators",
-        "about_close": "Close",
-        "size_dialog_title": "New size",
-        "size_dialog_label": "Enter size (max 10):",
-        "size_ok": "OK",
-        "size_cancel": "Cancel",
-        "warning_title": "Warning",
-        "error_title": "Error",
-        "info_title": "Info",
-        "done_title": "Done",
-        "imported_title": "Imported",
-        "select_saved_file_title": "Select saved systems file",
-        "msg_invalid_or_singular": "Invalid input or singular matrix.\n\n{err}",
-        "msg_could_not_save": "Could not save the system.\n\n{err}",
-        "msg_could_not_read": "Could not read {file}.\n\n{err}",
-        "msg_could_not_load_selected": "Could not load the selected system.\n\n{err}",
-        "msg_invalid_saved_index": "Invalid saved system index.",
-        "msg_missing_size_info": "The saved system does not contain size information.",
-        "msg_missing_polar_info": "The saved system does not contain A_polar/b_polar.",
-        "msg_loaded_done": "Saved system #{n} loaded into the GUI.",
-        "msg_list_updated": "Saved systems list updated. Use the 'Saved systems' dropdown to select one.",
-        "msg_no_valid_entries": "No valid entries found in the file.",
-        "msg_imported": "Imported {n} systems from {path}",
-        "msg_could_not_import": "Could not import the file.\n\n{err}",
-        "msg_size_range": "Size must be between 1 and 10.",
-        "msg_invalid_number": "Please enter a valid number.",
-        "calc_guide": (
-            "L = type a phasor (e.g. 10L30)\n"
-            "📋 = copy to clipboard (Ctrl+V into A/b)\n"
-            "r∠θ ⇄ a+jb = toggle result between phasor and rectangular"
-        ),
-        "calc_copy_btn": "📋 Copy",
-        "calc_invalid_expr": "Invalid expression:\n{expr}\n\n{err}",
-        "calc_error": "Calculator error: {err}",
-    },
-    "es": {
-        "theme_label": "Tema:",
-        "lang_label": "Idioma:",
-        "instructions": (
-            "Por y para ingenieros electrónicos\n\n\n"
-            "Cómo ingresar valores:\n"
-            "Puedes escribir valores como números complejos o fasores.\n"
-            "Complejo: 3+4j, -j2, 5, 1.2-3j\n"
-            "Fasores: 10L30°, 5L-90, 3L0°, 2.5L45\n"
-            "Ángulo en grados. Tamaño máximo: 10x10."
-        ),
-        "btn_change_size": "Cambiar tamaño",
-        "btn_load_example": "Cargar ejemplo",
-        "btn_solve": "Resolver",
-        "btn_load_saved": "Cargar sistema guardado",
-        "btn_import": "Importar de archivo...",
-        "btn_refresh_saved": "Refrescar lista guardada",
-        "solution_history": "Historial de soluciones:",
-        "saved_systems": "Sistemas guardados:",
-        "menu_file": "Archivo",
-        "menu_save_current": "Guardar sistema actual (Resolver y guardar)",
-        "menu_import": "Importar de archivo...",
-        "menu_load_saved": "Cargar sistema guardado",
-        "menu_refresh_saved": "Refrescar lista guardada",
-        "menu_exit": "Salir",
-        "menu_help": "Ayuda",
-        "menu_about": "Acerca de Complex Calc...",
-        "about_title": "Acerca de Complex Calc",
-        "about_heading": "Complex Calc",
-        "about_version": "Versión {version}  •  Última actualización: {date}",
-        "about_github": "GitHub: DasReyxr/Py-ComplexCalc",
-        "about_creators": "Creadores",
-        "about_close": "Cerrar",
-        "size_dialog_title": "Nuevo tamaño",
-        "size_dialog_label": "Ingresa el tamaño (máx. 10):",
-        "size_ok": "Aceptar",
-        "size_cancel": "Cancelar",
-        "warning_title": "Advertencia",
-        "error_title": "Error",
-        "info_title": "Info",
-        "done_title": "Listo",
-        "imported_title": "Importado",
-        "select_saved_file_title": "Selecciona el archivo de sistemas guardados",
-        "msg_invalid_or_singular": "Entrada inválida o matriz singular.\n\n{err}",
-        "msg_could_not_save": "No se pudo guardar el sistema.\n\n{err}",
-        "msg_could_not_read": "No se pudo leer {file}.\n\n{err}",
-        "msg_could_not_load_selected": "No se pudo cargar el sistema seleccionado.\n\n{err}",
-        "msg_invalid_saved_index": "Índice de sistema guardado inválido.",
-        "msg_missing_size_info": "El sistema guardado no contiene información de tamaño.",
-        "msg_missing_polar_info": "El sistema guardado no contiene A_polar/b_polar.",
-        "msg_loaded_done": "Sistema guardado #{n} cargado en la interfaz.",
-        "msg_list_updated": "Lista de sistemas guardados actualizada. Usa el menú 'Sistemas guardados' para elegir uno.",
-        "msg_no_valid_entries": "No se encontraron entradas válidas en el archivo.",
-        "msg_imported": "Se importaron {n} sistemas de {path}",
-        "msg_could_not_import": "No se pudo importar el archivo.\n\n{err}",
-        "msg_size_range": "El tamaño debe estar entre 1 y 10.",
-        "msg_invalid_number": "Por favor ingresa un número válido.",
-        "calc_guide": (
-            "L = escribir fasor (ej. 10L30)\n"
-            "📋 = copiar al portapapeles (Ctrl+V en A/b)\n"
-            "r∠θ ⇄ a+jb = alternar el resultado entre fasor y rectangular"
-        ),
-        "calc_copy_btn": "📋 Copiar",
-        "calc_invalid_expr": "Expresión inválida:\n{expr}\n\n{err}",
-        "calc_error": "Error en calculadora: {err}",
-    },
+
+def load_app_text():
+    try:
+        with open(resource_path("languages.json"), "r", encoding="utf-8") as f:
+            data = json.load(f)
+        if isinstance(data, dict) and "en" in data and "es" in data:
+            return data
+    except Exception:
+        pass
+
+    return {
+  "en": {
+    "theme_label": "Theme:",
+    "lang_label": "Language:",
+    "instructions": "For and By Electronics Engineers\n\n\nHow to enter values:\nYou can type values as complex numbers or phasors.\nComplex: 3+4j, -j2, 5, 1.2-3j\nPhasors: 10L30°, 5L-90, 3L0°, 2.5L45\nAngle in degrees. Max size: 10x10.",
+    "btn_change_size": "Change size",
+    "btn_load_example": "Load example",
+    "btn_solve": "Solve",
+    "btn_load_saved": "Load saved system",
+    "btn_import": "Import from file...",
+    "btn_refresh_saved": "Refresh saved list",
+    "solution_history": "Solution history:",
+    "saved_systems": "Saved systems:",
+    "saved_item_label": "SAVED",
+    "empty_saved_list": "EMPTY",
+    "menu_file": "File",
+    "menu_save_current": "Save current system (Solve & Save)",
+    "menu_import": "Import from file...",
+    "menu_load_saved": "Load saved system",
+    "menu_refresh_saved": "Refresh saved list",
+    "menu_exit": "Exit",
+    "menu_help": "Help",
+    "menu_about": "About Complex Calc...",
+    "about_title": "About Complex Calc",
+    "about_heading": "Complex Calc",
+    "about_version": "Version {version}  •  Last updated: {date}",
+    "about_github": "GitHub: DasReyxr/ComplexCalc-SW",
+    "about_creators": "Creators",
+    "about_close": "Close",
+    "size_dialog_title": "New size",
+    "size_dialog_label": "Enter size (max 10):",
+    "size_ok": "OK",
+    "size_cancel": "Cancel",
+    "warning_title": "Warning",
+    "error_title": "Error",
+    "info_title": "Info",
+    "done_title": "Done",
+    "imported_title": "Imported",
+    "select_saved_file_title": "Select saved systems file",
+    "msg_invalid_or_singular": "Invalid input or singular matrix.\n\n{err}",
+    "msg_could_not_save": "Could not save the system.\n\n{err}",
+    "msg_could_not_read": "Could not read {file}.\n\n{err}",
+    "msg_could_not_load_selected": "Could not load the selected system.\n\n{err}",
+    "msg_invalid_saved_index": "Invalid saved system index.",
+    "msg_missing_size_info": "The saved system does not contain size information.",
+    "msg_missing_polar_info": "The saved system does not contain A_polar/b_polar.",
+    "msg_loaded_done": "Saved system #{n} loaded into the GUI.",
+    "msg_list_updated": "Saved systems list updated. Use the 'Saved systems' dropdown to select one.",
+    "msg_no_valid_entries": "No valid entries found in the file.",
+    "msg_imported": "Imported {n} systems from {path}",
+    "msg_could_not_import": "Could not import the file.\n\n{err}",
+    "msg_size_range": "Size must be between 1 and 10.",
+    "msg_invalid_number": "Please enter a valid number.",
+    "calc_guide": "L = type a phasor (e.g. 10L30)\n📋 = copy to clipboard (Ctrl+V into A/b)\nr∠θ ⇄ a+jb = toggle result between phasor and rectangular",
+    "calc_copy_btn": "📋 Copy",
+    "calc_invalid_expr": "Invalid expression:\n{expr}\n\n{err}",
+    "calc_error": "Calculator error: {err}"
+  },
+  "es": {
+    "theme_label": "Tema:",
+    "lang_label": "Idioma:",
+    "instructions": "Por y para ingenieros electrónicos\n\n\nCómo ingresar valores:\nPuedes escribir valores como números complejos o fasores.\nComplejo: 3+4j, -j2, 5, 1.2-3j\nFasores: 10L30°, 5L-90, 3L0°, 2.5L45\nÁngulo en grados. Tamaño máximo: 10x10.",
+    "btn_change_size": "Cambiar tamaño",
+    "btn_load_example": "Cargar ejemplo",
+    "btn_solve": "Resolver",
+    "btn_load_saved": "Cargar sistema guardado",
+    "btn_import": "Importar de archivo...",
+    "btn_refresh_saved": "Refrescar lista guardada",
+    "solution_history": "Historial de soluciones:",
+    "saved_systems": "Sistemas guardados:",
+    "saved_item_label": "GUARDADO",
+    "empty_saved_list": "VACIO",
+    "menu_file": "Archivo",
+    "menu_save_current": "Guardar sistema actual (Resolver y guardar)",
+    "menu_import": "Importar de archivo...",
+    "menu_load_saved": "Cargar sistema guardado",
+    "menu_refresh_saved": "Refrescar lista guardada",
+    "menu_exit": "Salir",
+    "menu_help": "Ayuda",
+    "menu_about": "Acerca de Complex Calc...",
+    "about_title": "Acerca de Complex Calc",
+    "about_heading": "Complex Calc",
+    "about_version": "Versión {version}  •  Última actualización: {date}",
+    "about_github": "GitHub: GitHub: DasReyxr/ComplexCalc-SW",
+    "about_creators": "Creadores",
+    "about_close": "Cerrar",
+    "size_dialog_title": "Nuevo tamaño",
+    "size_dialog_label": "Ingresa el tamaño (máx. 10):",
+    "size_ok": "Aceptar",
+    "size_cancel": "Cancelar",
+    "warning_title": "Advertencia",
+    "error_title": "Error",
+    "info_title": "Info",
+    "done_title": "Listo",
+    "imported_title": "Importado",
+    "select_saved_file_title": "Selecciona el archivo de sistemas guardados",
+    "msg_invalid_or_singular": "Entrada inválida o matriz singular.\n\n{err}",
+    "msg_could_not_save": "No se pudo guardar el sistema.\n\n{err}",
+    "msg_could_not_read": "No se pudo leer {file}.\n\n{err}",
+    "msg_could_not_load_selected": "No se pudo cargar el sistema seleccionado.\n\n{err}",
+    "msg_invalid_saved_index": "Índice de sistema guardado inválido.",
+    "msg_missing_size_info": "El sistema guardado no contiene información de tamaño.",
+    "msg_missing_polar_info": "El sistema guardado no contiene A_polar/b_polar.",
+    "msg_loaded_done": "Sistema guardado #{n} cargado en la interfaz.",
+    "msg_list_updated": "Lista de sistemas guardados actualizada. Usa el menú 'GUARDADO' para elegir uno.",
+    "msg_no_valid_entries": "No se encontraron entradas válidas en el archivo.",
+    "msg_imported": "Se importaron {n} sistemas de {path}",
+    "msg_could_not_import": "No se pudo importar el archivo.\n\n{err}",
+    "msg_size_range": "El tamaño debe estar entre 1 y 10.",
+    "msg_invalid_number": "Por favor ingresa un número válido.",
+    "calc_guide": "L = escribir fasor (ej. 10L30)\n📋 = copiar al portapapeles (Ctrl+V en A/b)\nr∠θ ⇄ a+jb = alternar el resultado entre fasor y rectangular",
+    "calc_copy_btn": "📋 Copiar",
+    "calc_invalid_expr": "Expresión inválida:\n{expr}\n\n{err}",
+    "calc_error": "Error en calculadora: {err}"
+  }
 }
+
+
+APP_TEXT = load_app_text()
 
 class FasorCalculator(ctk.CTk):
     def __init__(self):
@@ -229,7 +224,9 @@ class FasorCalculator(ctk.CTk):
 
         # ===== COLOR VARIABLES =====
         self.setup_colors()
-        
+        self.current_colors = self.colors_dark.copy()
+
+
         # Set initial theme
         #ctk.set_appearance_mode("dark")
         #ctk.ThemeManager.load_theme(DPINK_PATH_THEME)
@@ -272,7 +269,7 @@ class FasorCalculator(ctk.CTk):
         self.header_title.pack(side="left", padx=(0, 12))
 
         # Smaller names subtitle (next to title)
-        names_text = "Das Reyes  •  Iker Garcia"
+        names_text = "Das Reyes  •  Iker Garcia •  Universidad Autónoma de Aguascalientes"
         self.header_names = ctk.CTkLabel(header_frame, text=names_text, font=("Helvetica", 17))
         self.header_names.pack(side="left", padx=(0, 8), pady=(8,0))
 
@@ -292,8 +289,6 @@ class FasorCalculator(ctk.CTk):
 
         
     
-        # Set initial colors to dark mode
-        self.current_colors = self.colors_dark.copy()
         # ============================
         # MAIN FRAME
         # ============================
@@ -363,7 +358,7 @@ class FasorCalculator(ctk.CTk):
         calc_frame.pack(pady=5, padx=10)
         calc_frame.pack_propagate(False)  # Prevent frame from resizing to content
         
-        ctk.CTkLabel(calc_frame, text="🧮 AUX Calc", font=("Helvetica", 12, "bold")).pack(pady=2)
+        ctk.CTkLabel(calc_frame, text="AUX Calc", font=("Helvetica", 12, "bold")).pack(pady=2)
         
         # Calculator display - shows what you're typing
         self.calc_display = ctk.CTkEntry(
@@ -1079,23 +1074,23 @@ class FasorCalculator(ctk.CTk):
         try:
             self.saved_items = self.core.load_saved_items()
             if not self.saved_items:
-                self.saved_menu.configure(values=["(empty)"])
-                self.saved_menu.set("(empty)")
+                self.saved_menu.configure(values=["(vacio)"])
+                self.saved_menu.set(f"{self.t('empty_saved_list')}")
                 return
             labels = []
             for i, obj in enumerate(self.saved_items, start=1):
                 ts = obj.get("timestamp", "unknown time")
-                labels.append(f"Saved system #{i} — {ts}")
+                labels.append(f"{self.t('saved_item_label')} #{i} — {ts}")
             self.saved_menu.configure(values=labels)
             self.saved_menu.set(labels[-1])
         except Exception as e:
             messagebox.showwarning(self.t("warning_title"), self.t("msg_could_not_read", file=self.saved_filename, err=e))
-            self.saved_menu.configure(values=["(empty)"])
-            self.saved_menu.set("(empty)")
+            self.saved_menu.configure(values=[f"{self.t('empty_saved_list')}"])
+            self.saved_menu.set(f"{self.t('empty_saved_list')}")
 
     def load_saved_option(self, option_text):
         """Callback when the user selects an item in saved_menu."""
-        if not option_text or option_text == "(empty)":
+        if not option_text or option_text == "(vacio)":
             return
         try:
             idx = int(option_text.split("#")[1].split(" ")[0]) - 1
@@ -1162,7 +1157,7 @@ class FasorCalculator(ctk.CTk):
             labels = []
             for i, obj in enumerate(self.saved_items, start=1):
                 ts = obj.get("timestamp", "unknown time")
-                labels.append(f"Saved system #{i} — {ts}")
+                labels.append(f"{self.t('saved_item_label')} #{i} — {ts}")
             self.saved_menu.configure(values=labels)
             self.saved_menu.set(labels[-1])
             messagebox.showinfo(self.t("imported_title"), self.t("msg_imported", n=len(self.saved_items), path=file_path))
