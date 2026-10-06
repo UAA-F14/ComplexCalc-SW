@@ -6,7 +6,7 @@
 
 | Dark theme | Light theme |
 |---|---|
-| ![Dark theme](images/app-screenshot.png) | ![Light theme](images/app-screenshot-light.png) |
+| ![Dark theme](doc/src/app-screenshot.png) | ![Light theme](doc/src/app-screenshot-light.png) |
 
 ---
 
