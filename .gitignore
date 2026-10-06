@@ -5,18 +5,18 @@ __pycache__/
 build/
 
 # LaTeX build artifacts (scoped to docs/ so the LTspice .log in simulation/ stays tracked)
-docs/*.aux
-docs/*.log
-docs/*.out
-docs/*.toc
-docs/*.synctex.gz
-docs/*.fls
-docs/*.fdb_latexmk
-docs/*.bbl
-docs/*.blg
-docs/*.nav
-docs/*.snm
-docs/*.vrb
+doc/*.aux
+doc/*.log
+doc/*.out
+doc/*.toc
+doc/*.synctex.gz
+doc/*.fls
+doc/*.fdb_latexmk
+doc/*.bbl
+doc/*.blg
+doc/*.nav
+doc/*.snm
+doc/*.vrb
 .venv/
 
 # LTspice backups
