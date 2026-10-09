@@ -1,6 +1,6 @@
 # Py-ComplexCalc
 
-**A complete, user-friendly GUI ecosystem for solving n×n complex linear systems (Ax=b)**—built for electronics engineers, circuit analysts, and students working with AC circuits, impedance calculations, and complex number mathematics.
+**A complete, user-friendly GUI for solving n×n complex linear systems (Ax=b)**—built for electronics engineers, circuit analysts, and students working with AC circuits, impedance calculations, and complex number mathematics.
 
 **Solve Ax=b instantly** with dual-format output (polar & rectangular), flexible input, and full system persistence.
 
