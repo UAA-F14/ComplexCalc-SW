@@ -21,20 +21,32 @@ Building via raw CLI flags instead of the .spec also works, but the
     # Linux / macOS
     python -m PyInstaller --onefile --windowed UI_ComplexCalc.py --add-data "HK.jpg:." --add-data "IE.png:." --add-data "themes.json:."
 '''
+import os
+import json
+import sys
+from pathlib import Path
+
 import numpy as np
 import customtkinter as ctk
 from tkinter import messagebox, simpledialog, filedialog
-from ComplexCalc import FasorCalculatorCore, complejo_rect, complejo_a_fasor
-import os
-import json
 from PIL import Image, ImageTk
-import sys
 import webbrowser
+
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+APP_DIR = Path(__file__).resolve().parent
+SRC_DIR = PROJECT_ROOT / "src"
+
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+if str(SRC_DIR) not in sys.path:
+    sys.path.insert(0, str(SRC_DIR))
+
+from src.ComplexCalc import FasorCalculatorCore, complejo_rect, complejo_a_fasor
 
 
 def resource_path(relative):
     # Use PyInstaller temp folder when frozen, otherwise use folder where this file lives
-    base_path = getattr(sys, "_MEIPASS", os.path.dirname(__file__))
+    base_path = getattr(sys, "_MEIPASS", str(APP_DIR))
     return os.path.join(base_path, relative)
 
 PINK_PATH_PHOTO = resource_path("HK.jpg")
@@ -216,8 +228,8 @@ class FasorCalculator(ctk.CTk):
         self.current_mode = "dark"  # Track current mode
 
         # Files
-        self.saved_filename = "saved_systems.txt"
-        self.exported_py = "exported_systems.py"
+        self.saved_filename = str(APP_DIR / "saved_systems.txt")
+        self.exported_py = str(SRC_DIR / "exported_systems.py")
 
         # core logic (UI-independent)
         self.core = FasorCalculatorCore(saved_filename=self.saved_filename, exported_py=self.exported_py)
