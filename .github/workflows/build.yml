@@ -52,10 +52,22 @@ jobs:
       - name: Build executable
         run: pyinstaller app/UI_ComplexCalc.spec
 
+      - name: Package macOS artifact
+        run: |
+          if [ -d "dist/UI_ComplexCalc.app" ]; then
+            ditto -c -k --keepParent "dist/UI_ComplexCalc.app" "UI_ComplexCalc-macos.zip"
+          elif [ -f "dist/UI_ComplexCalc" ]; then
+            ditto -c -k --keepParent "dist/UI_ComplexCalc" "UI_ComplexCalc-macos.zip"
+          else
+            echo "No macOS build artifact found in dist/"
+            ls -R dist || true
+            exit 1
+          fi
+
       - uses: actions/upload-artifact@v4
         with:
           name: ComplexCalc-macos
-          path: "code/dist/UI_ComplexCalc.app"
+          path: "code/UI_ComplexCalc-macos.zip"
 
   build-linux:
     runs-on: ubuntu-latest
@@ -105,7 +117,7 @@ jobs:
         run: |
           gh release create "${{ github.ref_name }}" \
             "artifacts/ComplexCalc-windows/UI_ComplexCalc.exe" \
-            "artifacts/ComplexCalc-macos/UI_ComplexCalc.app" \
+            "artifacts/ComplexCalc-macos/UI_ComplexCalc-macos.zip" \
             "artifacts/ComplexCalc-linux/UI_ComplexCalc" \
             --repo "${{ github.repository }}" \
             --title "${{ github.ref_name }} — Little Update" \
