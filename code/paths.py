@@ -11,6 +11,7 @@ FROZEN = getattr(sys, "frozen", False)
 ROOT = Path(__file__).resolve().parent
 RESOURCES_DIR = Path(getattr(sys, "_MEIPASS", ROOT)) / "resources"
 DATA_DIR = (Path(sys.executable).parent if FROZEN else ROOT) / "data"
+DATA_DIR.mkdir(parents=True, exist_ok=True)
 
 SAVED_FILE = DATA_DIR / "saved_systems.txt"
 EXPORT_FILE = DATA_DIR / "exported_systems.py"
