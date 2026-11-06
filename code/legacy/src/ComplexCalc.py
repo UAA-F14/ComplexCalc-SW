@@ -208,6 +208,9 @@ class FasorCalculatorCore:
             "x_rect": result_dict.get("x_rect"),
         }
 
+        os.makedirs(os.path.dirname(os.path.abspath(self.saved_filename)), exist_ok=True)
+        os.makedirs(os.path.dirname(os.path.abspath(self.exported_py)), exist_ok=True)
+
         # write JSON entry
         try:
             with open(self.saved_filename, "a", encoding="utf-8") as f:

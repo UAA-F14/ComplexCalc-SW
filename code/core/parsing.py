@@ -10,12 +10,9 @@ _J_BEFORE_DIGITS = re.compile(r"(?<!\d)([+-]?)j(\d+(?:\.\d+)?)")
 PHASOR_TOKEN = re.compile(r"(\d+(?:\.\d+)?)[Ll]([+-]?\d+(?:\.\d+)?)°?")
 
 
-def parse_value(text: str) -> complex:
-    """Parsea UN valor (celda de matriz/vector): '3+4j', '-j2', '1.2-3i', '10L30°', '10∠30'."""
-    t = (text or "").strip()
-    if not t:
-        raise ValueError("Empty value")
-    t = t.replace(" ", "").replace("∠", "L")
+def _parse_simple(text: str) -> complex:
+    """Un único valor sin operaciones: '3+4j', '-j2', '1.2-3i', '10L30°', '10∠30'."""
+    t = text.strip().replace(" ", "").replace("∠", "L")
 
     if "L" in t:
         r, ang = t.split("L", 1)
@@ -36,10 +33,21 @@ def parse_value(text: str) -> complex:
             raise ValueError(f"Invalid complex value: {text}")
 
 
+def parse_value(text: str) -> complex:
+    """Parsea el contenido de UNA celda. Acepta un valor simple ('3+4j', '10L30°')
+    o una expresión ('2*(3+4j)', '10L30/2', '(1+2j)^2', '5-10L30')."""
+    if not (text or "").strip():
+        raise ValueError("Empty value")
+    try:
+        return _parse_simple(text)
+    except ValueError:
+        return evaluate_expression(text)
+
+
 def evaluate_expression(text: str) -> complex:
     """Evalúa una expresión completa que mezcla rectangular y fasores: '10L30+5L45', '2j*3j'.
 
-    `parse_value` solo acepta un valor; esto es para la calculadora auxiliar (+ - * / ^).
+    Soporta + - * / ^ y paréntesis. La usan la calculadora auxiliar y, como respaldo, `parse_value`.
     """
     t = (text or "").strip()
     if not t or t == "0":

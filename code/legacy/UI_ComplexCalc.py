@@ -35,6 +35,9 @@ import webbrowser
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 APP_DIR = Path(__file__).resolve().parent
 SRC_DIR = PROJECT_ROOT / "src"
+FROZEN = getattr(sys, "frozen", False)
+DATA_DIR = (Path(sys.executable).parent if FROZEN else APP_DIR) / "data"
+DATA_DIR.mkdir(parents=True, exist_ok=True)
 
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
@@ -228,8 +231,8 @@ class FasorCalculator(ctk.CTk):
         self.current_mode = "dark"  # Track current mode
 
         # Files
-        self.saved_filename = str(APP_DIR / "saved_systems.txt")
-        self.exported_py = str(SRC_DIR / "exported_systems.py")
+        self.saved_filename = str(DATA_DIR / "saved_systems.txt")
+        self.exported_py = str(DATA_DIR / "exported_systems.py")
 
         # core logic (UI-independent)
         self.core = FasorCalculatorCore(saved_filename=self.saved_filename, exported_py=self.exported_py)

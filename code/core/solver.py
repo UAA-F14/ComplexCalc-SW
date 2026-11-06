@@ -7,9 +7,17 @@ from .formatting import complejo_a_fasor, complejo_rect
 from .parsing import parse_value
 
 
+def _parse_cell(text, label):
+    """parse_value con la posición de la celda en el mensaje de error."""
+    try:
+        return parse_value(text)
+    except ValueError as e:
+        raise ValueError(f"{label}: {e}") from None
+
+
 def solve_from_strings(A_strings, b_strings, max_size=10):
-    """A_strings: lista de listas de str; b_strings: lista de str. Devuelve dict con
-    timestamp, size, A/b/x (numpy) y A/b/x _polar / _rect (str)."""
+    """A_strings: lista de listas de str (valores o expresiones); b_strings: lista de str.
+    Devuelve dict con timestamp, size, A/b/x (numpy) y A/b/x _polar / _rect (str)."""
     size = len(b_strings)
     if size == 0:
         raise ValueError("Empty system")
@@ -17,8 +25,9 @@ def solve_from_strings(A_strings, b_strings, max_size=10):
         raise ValueError(f"Size {size} exceeds maximum {max_size}")
 
     rng = range(size)
-    A = np.array([[parse_value(A_strings[i][j]) for j in rng] for i in rng], dtype=complex)
-    b = np.array([parse_value(s) for s in b_strings], dtype=complex)
+    A = np.array([[_parse_cell(A_strings[i][j], f"A[{i + 1},{j + 1}]") for j in rng] for i in rng],
+                 dtype=complex)
+    b = np.array([_parse_cell(s, f"b[{i + 1}]") for i, s in enumerate(b_strings)], dtype=complex)
     x = np.linalg.solve(A, b)
 
     def fmt(fn, arr):
